@@ -1,0 +1,113 @@
+1. create and use database
+
+pratik=# create database ror_training;
+CREATE DATABASE
+pratik=# SELECT datname FROM pg_database;
+   datname    
+--------------
+ postgres
+ Pratik
+ template1
+ template0
+ pratik
+ ror_training
+(6 rows)
+
+pratik=# \c ror_training 
+You are now connected to database "ror_training" as user "pratik".
+
+-----------------------------------------------------------------------------
+2. Create Table
+ror_training=# create table employee(
+ror_training(# employee_ID int,
+ror_training(# employee_Name varchar(50),
+ror_training(# designation varchar(50),
+ror_training(# project varchar(50),
+ror_training(# primary key(employee_ID));
+CREATE TABLE
+ror_training=# \d
+         List of relations
+ Schema |   Name   | Type  | Owner  
+--------+----------+-------+--------
+ public | employee | table | pratik
+(1 row)
+
+    ^
+ror_training=# \d+ employee;
+                                            Table "public.employee"
+    Column     |         Type          | Collation | Nullable | Default | Storage  | Stats target | Description 
+---------------+-----------------------+-----------+----------+---------+----------+--------------+-------------
+ employee_id   | integer               |           | not null |         | plain    |              | 
+ employee_name | character varying(50) |           |          |         | extended |              | 
+ designation   | character varying(50) |           |          |         | extended |              | 
+ project       | character varying(50) |           |          |         | extended |              | 
+Indexes:
+    "employee_pkey" PRIMARY KEY, btree (employee_id)
+Access method: heap
+
+--------------------------------------------------------------------------------------------------------------------------
+
+3. Insert into table
+
+insert into employee(employee_id,employee_name,designation,project) values(735,'Pratik Baravkar','Software Engineer','New Hire Training');
+INSERT 0 1
+ror_training=# select * from employee;
+ employee_id |  employee_name  |    designation    |      project      
+-------------+-----------------+-------------------+-------------------
+         735 | Pratik Baravkar | Software Engineer | New Hire Training
+(1 row)
+
+----------------------------------------------------------------------------------------------------------------------------
+
+4. update table :
+
+ror_training=# select * from employee;                                          //before upadte
+ employee_id |  employee_name   |    designation    |      project      
+-------------+------------------+-------------------+-------------------
+         735 | Pratik Baravkar  | Software Engineer | New Hire Training
+         741 | Harshal Sonawane | Software Engineer | New Hire Training
+         742 | Shubham More     | Software Engineer | New Hire Training
+(3 rows)
+
+ror_training=# update employee set employee_name = 'Pratik Ramchandra Baravkar' where employee_ID=735;
+UPDATE 1
+
+ror_training=# select * from employee;					//after update name changes of emp_id 735
+ employee_id |       employee_name        |    designation    |      project      
+-------------+----------------------------+-------------------+-------------------
+         741 | Harshal Sonawane           | Software Engineer | New Hire Training
+         742 | Shubham More               | Software Engineer | New Hire Training
+         735 | Pratik Ramchandra Baravkar | Software Engineer | New Hire Training
+(3 rows)
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+5. Delete row : 
+
+ror_training=# select * from employee;					//before delete
+ employee_id |       employee_name        |    designation    |      project      
+-------------+----------------------------+-------------------+-------------------
+         741 | Harshal Sonawane           | Software Engineer | New Hire Training
+         742 | Shubham More               | Software Engineer | New Hire Training
+         735 | Pratik Ramchandra Baravkar | Software Engineer | New Hire Training
+(3 rows)
+
+ror_training=# delete from employee where employee_id=735;
+
+DELETE 1
+ror_training=# select * from employee;					//after delete
+ employee_id |  employee_name   |    designation    |      project      
+-------------+------------------+-------------------+-------------------
+         741 | Harshal Sonawane | Software Engineer | New Hire Training
+         742 | Shubham More     | Software Engineer | New Hire Training
+(2 rows)
+
+
+
+
+
+
+
+
+
+
