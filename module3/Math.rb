@@ -32,19 +32,14 @@ class  Number
 
   def self.is_prime(number)               #method for if number is prime
     flag = true
-    iterator = 2
     if number < 2
-      flag = false
+      return false
     elsif number > 2
-      while iterator <= number/2
-        if number % iterator == 0
-          flag = false
-          break
+      (2..(number / 2)).each do |iterator|
+        return false if (number % iterator == 0)
         end
-        iterator += 1
-      end
     end
-    flag
+    true
   end
 
   def self.modulus(number1, number2)    #method for modulus of numbers
@@ -54,7 +49,7 @@ class  Number
   def self.reverse(number)              #method for reverse a number 
     reverse_number = 0
     while number > 0
-      reverse_number = (reverse_number * 10) + number%10
+      reverse_number = (reverse_number * 10) + number % 10
       number /= 10
     end
     reverse_number
@@ -65,7 +60,7 @@ puts Number.addition(1,2,3,4,5)
 puts Number.multiplication(1,2,3,4,5)
 puts Number.division(5,2)
 
-if Number.is_prime(3)
+if Number.is_prime(2)
   puts "Number is prime"
 else
   puts "Number is not prime"
