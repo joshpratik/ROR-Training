@@ -37,7 +37,7 @@ class  Number
     elsif number > 2
       (2..(number / 2)).each do |iterator|
         return false if (number % iterator == 0)
-        end
+      end
     end
     true
   end
