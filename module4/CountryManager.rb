@@ -55,6 +55,15 @@ class Country
   end
 end
 
+def is_country_present?(country)
+  if country != nil
+    return true
+  else
+    puts 'First enter the country data'
+    return false
+  end
+end
+
 is_country = false
 while true
   puts 'Enter choice: '
@@ -62,31 +71,21 @@ while true
   puts '2.Is country eligible to get loan from World Bank or IMF?'
   puts '3.Is country able to secure place in UNS?'
   puts '4.Is country able to win from enemy?'
-  puts 'Enter any number to exit'
+  puts 'Enter 0 any number to exit'
     case gets.chomp.to_i
     when 1
       puts 'Enter population, GDP, number of states, army strength(200-1), state of country'
       country = Country.new(gets.chomp.to_i, gets.chomp.to_f, gets.chomp.to_i, gets.chomp.to_i, gets.chomp)
       is_country = true
     when 2
-      if is_country
-        country.eligible_for_loan(country.state_of_country)
-      else
-       puts 'Enter country details'
-      end  
+      country.eligible_for_loan(country.state_of_country) if is_country_present?(country)
     when 3
-      if is_country
-        country.seat_in_uns(country.gdp, country.army_strength)
-      else
-        puts 'Enter country details'
-      end
+      country.seat_in_uns(country.gdp, country.army_strength) if is_country_present?(country)
     when 4
-      if is_country
-        country.win(country.army_strength)
-      else
-        puts 'Enter country details'
-      end
-    else
+      country.win(country.army_strength) if is_country_present?(country)
+    when 0
       break
+    else
+      puts "invalid choice"
   end
 end
