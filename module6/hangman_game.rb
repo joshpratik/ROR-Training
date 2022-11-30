@@ -15,7 +15,7 @@ def hangman(word)
           if ch == letter
            incomplete_word[index] = ch      
           end
-         end
+        end
         if !incomplete_word.include? "_"            #if word is complete then break
           break;
         end
