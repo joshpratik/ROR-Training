@@ -1,7 +1,0 @@
-Q4. Regex for mobile number, email address, name, gender(M / F) and amount
-
-
-1. regex for 10 digit mobile number : /^\d{10}$/
-2. regex for email address          : /^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/
-3. regex for name 		     : /^[A-Za-z]+([\ A-Za-z]+)*/
-4. regex for gender (M/F)           : /^M$|^F$/
