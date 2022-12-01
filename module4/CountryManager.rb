@@ -71,7 +71,7 @@ while true
   puts '2.Is country eligible to get loan from World Bank or IMF?'
   puts '3.Is country able to secure place in UNS?'
   puts '4.Is country able to win from enemy?'
-  puts 'Enter 0 any number to exit'
+  puts 'Enter 0 to exit'
     case gets.chomp.to_i
     when 1
       puts 'Enter population, GDP, number of states, army strength(200-1), state of country'
