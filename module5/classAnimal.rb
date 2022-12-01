@@ -10,7 +10,7 @@ class Birds
 
   def voice; raise MESS; end                        #make override compulsory if not on call it will raise an error    
 
-  def fly                                           
+  def can_fly?                                           
     puts "Ofcourse birds can fly"
   end
 end
@@ -49,13 +49,13 @@ end
 
 eagle = Eagle.new("Forests",true,"Brown",22,"Golden")
 eagle.voice
-eagle.fly
+eagle.can_fly?
 puts eagle
 
 penguine = Penguine.new("Sea",false,"Black and White",60,"African")
-def penguine.fly                                  #singleton method will have different implementation only for this object
+def penguine.can_fly?                                  #singleton method will have different implementation only for this object
   puts "No penguines can't fly but they can swim"
 end
-penguine.fly
+penguine.can_fly?
 penguine.voice
 puts penguine
