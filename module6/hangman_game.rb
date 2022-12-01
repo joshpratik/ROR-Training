@@ -2,25 +2,21 @@ def hangman(word)
   lifes = 5;
   incomplete_word = Array.new(word.length, "_")  #new aaray of word size                          
   while lifes > 0  do
-    puts "lifes remaining #{lifes}"     #printing remaining lifes
+    puts "\nlifes remaining #{lifes}\n"     #printing remaining lifes
     puts incomplete_word.join(" ");          #printing word with blank spaces
-    puts 'Enter the letter : '
+    puts "\nEnter the letter : "
     letter = gets.chomp.downcase       
     if(letter.length != 1)
-      puts 'enter only one letter at a time'  #if user enters more than one letter
+      puts "\nenter only one letter at a time"  #if user enters more than one letter
       next
     else
       if word.include? letter      #checking if entered letter is present in the reamining letters
         word.chars.each_with_index do |ch , index|   #loop for positioning the guessed character at perticular position
-          if ch == letter
-           incomplete_word[index] = ch      
-          end
+          incomplete_word[index] = ch if ch == letter     
         end
-        if !incomplete_word.include? "_"            #if word is complete then break
-          break;
-        end
+        break if !incomplete_word.include? "_"            #if word is complete then break
       else
-        puts 'Ohhhooo!! Wrong letter.!!'
+        puts "\nOhhhooo!! Wrong letter.!!"
         lifes -= 1                                   #if letter is wrong decrease the life
       end
     end
@@ -28,9 +24,9 @@ def hangman(word)
 
   if incomplete_word.join.to_s == word                    #check if final word matches input word
     puts word
-    puts 'Congratulations!!!..You won...!!!'
+    puts "\nCongratulations!!!..You won...!!!"
   else
-    puts 'Ooooo...!!!You lost...!!!'
+    puts "\nOoooo...!!!You lost...!!!"
   end
 end
 
