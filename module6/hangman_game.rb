@@ -31,7 +31,8 @@ def hangman(word)
 end
 
 arr = ['allayed','miasma','putrescences','thiols','powderers','duties','encapsulations','dehydrators','congaed','corridors']
-hangman(arr.sample)
+random = Random.new
+hangman(arr[random.rand(0..arr.length)])
 
 
 =begin
