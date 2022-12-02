@@ -17,17 +17,17 @@ Whether the country can win the war or not
 module CountryCriteria
   def eligible_for_loan(state_of_country)
     if state_of_country.upcase == 'DEVELOPING' || state_of_country.upcase == 'UNDERDEVELOPED'
-      puts 'Eligible to get loan from IMF or World Bank'
+      puts "\nEligible to get loan from IMF or World Bank\n"
     else
-      puts 'Not eligible to get loan from IMF or World Bank'
+      puts "\nNot eligible to get loan from IMF or World Bank\n"
     end
   end
 
   def seat_in_uns(gdp, army_strength)
     if gdp >= 8 && army_strength >= 100
-      puts 'Eligible to get seat in UNS'
+      puts "\nEligible to get seat in UNS\n"
     else
-      puts 'NOT Eligible to get seat in UNS'
+      puts "\nNOT Eligible to get seat in UNS\n"
     end
   end
 end
@@ -35,9 +35,9 @@ end
 module CountryStrength
   def win(army_strength)
     if army_strength >= 80
-      puts "You are going to definitly win!!!"
-    else
-      puts 'Need to increaase army strength'
+      puts "\nYou are going to definitly win!!!\n"
+    else 
+      puts "\nNeed to increaase army strength\n"
     end
   end
 end
@@ -59,14 +59,34 @@ def is_country_present?(country)
   if country != nil
     return true
   else
-    puts 'First enter the country data'
+    puts "\nFirst enter the country data"
     return false
   end
 end
 
+def get_number(field)
+  puts "\nenter the #{field} : "
+  while true
+    field_value = gets.chomp.to_i
+    return field_value if field_value > 0
+    puts "Invalid input enter Positive Integer Value only"
+  end
+end
+
+def get_state
+  puts "\nenter the state of country (developing/developed/underdeveloped): "
+  while true
+    field_value = gets.chomp.upcase
+    return field_value if field_value == "DEVELOPED" || field_value == "DEVELOPING" || field_value == "UNDERDEVELOPED"
+    puts "Invalid input enter metioned values only"
+  end
+end
+
+
+
 is_country = false
 while true
-  puts 'Enter choice: '
+  puts "\nEnter choice: "
   puts '1.Enter country data '
   puts '2.Is country eligible to get loan from World Bank or IMF?'
   puts '3.Is country able to secure place in UNS?'
@@ -75,7 +95,7 @@ while true
     case gets.chomp.to_i
     when 1
       puts 'Enter population, GDP, number of states, army strength(200-1), state of country'
-      country = Country.new(gets.chomp.to_i, gets.chomp.to_f, gets.chomp.to_i, gets.chomp.to_i, gets.chomp)
+      country = Country.new(get_number("population"), get_number("GDP"), get_number("number of states"), get_number("army strength(200-1)"), get_state)
       is_country = true
     when 2
       country.eligible_for_loan(country.state_of_country) if is_country_present?(country)
@@ -86,6 +106,6 @@ while true
     when 0
       break
     else
-      puts "invalid choice"
+      puts "\ninvalid choice"
   end
 end
