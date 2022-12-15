@@ -1,9 +1,7 @@
 class PostsController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :set_post, only: %i[ show edit update destroy ]
-
   def index
-    render json: Post.all
+    @posts = Post.all
   end
 
   def show
@@ -18,11 +16,12 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
-
     if post.save
-      render json: {message: "Post added successfully"}
+      redirect_to "/users/#{params[:user_id]}"
+      flash[:success] = "Post Added Successfully"
     else
-      render json: {message: "Failed"}
+      redirect_to "/addpost/#{params[:user_id]}"
+      flash[:danger] = "Post Not Added"
     end
   end
 
@@ -30,26 +29,44 @@ class PostsController < ApplicationController
     begin
       post =  Post.find(params[:id])
     rescue => error
-      render json: {message: error.message}
+      flash[:danger] = "Post Not Found"
     else
-      if user.update(post_params)
-        render json: {message: "User updated successfully"}
+      if post.update(post_params)
+        redirect_to "/users/#{post.user_id}"
+        flash[:success] = "Post Updated"
       else
-        render json: {message: "User updation failed"}
+        redirect_to "/users/#{post.user_id}"
+        flash[:success] = "Post Not Updated"
       end
     end
   end
 
   def destroy
     if Post.destroy(params[:id])
-      render json: {message: "Post deleted successfully"}
+      redirect_back(fallback_location: root_path)
+      flash[:success] = "Post Deleted Successfully"
     else
-      render json: {message: "Post deletion failed"}
+      redirect_back(fallback_location: root_path)
+      flash[:danger] = "Post Deletion Failed"
+    end
+  end
+
+  def new
+  end
+
+  def edit
+    begin
+      @post =  Post.find(params[:id])
+    rescue => error
+      redirect_back(fallback_location: root_path)
+      flash[:danger] = "Post Not Found"
+    else
+      @post
     end
   end
 
   private
     def post_params
-      params.require(:post).permit(:title, :body, :user_id)
+      params.permit(:title, :body, :user_id)
     end
 end

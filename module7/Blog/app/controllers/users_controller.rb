@@ -1,33 +1,37 @@
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session
   def index
-    render json: User.all
+    @users = User.all
   end
 
   def create
     user = User.new(user_params)
     if user.save
-      render json: {message: "User ragistered successfully"}
+      redirect_to '/signup'
+      flash[:success] = "Success"
     else
-      render json: {message: "User registration failed"}
+      redirect_to '/signup'
+      flash[:danger] = "error"
     end
   end
 
   def destroy
     if User.destroy(params[:id])
-      render json: {message: "User deleted successfully"}
+      redirect_to '/'
+      flash[:success] = "User Deleted Successfully"
     else
-      render json: {message: "User deletion failed"}
+      redirect_back(fallback_location: root_path)
+      flash[:danger] = "User Deletion Failed"
     end
   end
 
   def show
     begin
-      user =  User.find(params[:id])
+      @user =  User.find(params[:id])
     rescue => error
-      render json: {message: error.message}
+      flash[:danger] = error.message
     else
-      render json: user
+      @user
     end
   end
 
@@ -35,19 +39,35 @@ class UsersController < ApplicationController
     begin
       user =  User.find(params[:id])
     rescue => error
-      render json: {message: error.message}
+      flash[:danger] = "User Not Found"
     else
       if user.update(user_params)
-        render json: {message: "User updated successfully"}
+        redirect_to "/users/#{user.id}"
+        flash[:success] = "User Updated"
       else
-        render json: {message: "User updation failed"}
+        redirect_to "/users/#{user.id}"
+        flash[:success] = "User Not Updated"
       end
+    end
+  end
+
+  def new 
+  end
+
+  def edit
+    begin
+      @user =  User.find(params[:id])
+    rescue => error
+      redirect_back(fallback_location: root_path)
+      flash[:danger] = "Post Not Found"
+    else
+      @user
     end
   end
 
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :bio, :age)
+      params.permit(:name, :email, :bio, :age, :password_digest)
     end
 end

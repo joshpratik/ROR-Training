@@ -7,4 +7,11 @@ Rails.application.routes.draw do
   resources :users do
     resources :posts
   end
+
+  root to: 'posts#index'
+  get 'signup', to: 'users#new', as: 'signup'
+  post 'register', to: 'users#create', as: 'register'
+  get 'addpost/:id', to: 'posts#new'
+  get 'editpost/:id', to: 'posts#edit'
+  get 'edituser/:id', to: 'users#edit'
 end
