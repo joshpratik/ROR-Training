@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
+      #NewUserEmailMailer.notify_user(user).deliver
       redirect_to '/signup'
       flash[:success] = "Success"
     else
