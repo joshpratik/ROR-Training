@@ -1,0 +1,16 @@
+<h2>Sign Up</h2>
+<h3><%= render "layouts/flash" %></h3>
+<form method="POST" action="/register">
+  <%= token_tag %>
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name" required><br/><br/>
+  <label for="bio">Bio</label>
+  <input type="text" name="bio" id="bio"><br/><br/>
+  <label for="age">Age</label>
+  <input type="number" name="age" id="age"><br/><br/>
+  <label for="mail">E-mail</label>
+  <input type="text" name="email" id="mail" required><br/><br/>
+  <label for="password">Password</label>
+  <input type="password" name="password_digest" id="password" required><br/><br/>
+  <input type="submit" value="register">
+</form>
