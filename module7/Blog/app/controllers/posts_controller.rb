@@ -1,14 +1,15 @@
 class PostsController < ApplicationController
   protect_from_forgery with: :null_session
+
   def index
     @posts = Post.all
   end
 
   def show
     begin
-      post =  Post.find(params[:id])
+      post = Post.find(params[:id])
     rescue => error
-      render json: {message: error.message}
+      render json: { message: error.message }
     else
       render json: post
     end
@@ -17,25 +18,25 @@ class PostsController < ApplicationController
   def create
     post = Post.new(post_params)
     if post.save
-      redirect_to "/users/#{params[:user_id]}"
+      redirect_to user_path(params[:user_id])
       flash[:success] = "Post Added Successfully"
     else
-      redirect_to "/addpost/#{params[:user_id]}"
+      redirect_to register_path(params[:user_id])
       flash[:danger] = "Post Not Added"
     end
   end
 
   def update
     begin
-      post =  Post.find(params[:id])
+      post = Post.find(params[:id])
     rescue => error
       flash[:danger] = "Post Not Found"
     else
       if post.update(post_params)
-        redirect_to "/users/#{post.user_id}"
+        redirect_to user_path(params[:user_id])
         flash[:success] = "Post Updated"
       else
-        redirect_to "/users/#{post.user_id}"
+        redirect_to user_path(params[:user_id])
         flash[:success] = "Post Not Updated"
       end
     end
@@ -56,7 +57,7 @@ class PostsController < ApplicationController
 
   def edit
     begin
-      @post =  Post.find(params[:id])
+      @post = Post.find(params[:id])
     rescue => error
       redirect_back(fallback_location: root_path)
       flash[:danger] = "Post Not Found"
@@ -66,7 +67,8 @@ class PostsController < ApplicationController
   end
 
   private
-    def post_params
-      params.permit(:title, :body, :user_id)
-    end
+
+  def post_params
+    params.permit(:title, :description, :user_id)
+  end
 end
