@@ -1,0 +1,8 @@
+<a href='/signup'>Register User</a>
+<h3><%= render "layouts/flash" %></h3>
+<% @posts.each do |post| %>
+  <% user = post.user %>
+  <a href="users/<%= user.id %>"><%= user.name %></a>
+  <h3><%= post.title %></h3>
+  <h4><%= post.description %></h4><hr/>
+<% end %>

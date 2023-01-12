@@ -1,0 +1,14 @@
+<h2>Sign Up</h2>
+<h3><%= render "layouts/flash" %></h3>
+<form method="PUT" action="/users/<%=@user.id%>">
+  <%= token_tag %>
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name" value="<%=@user.name%>" required><br/><br/>
+  <label for="bio">Bio</label>
+  <input type="text" name="bio" id="bio" value="<%=@user.bio%>"><br/><br/>
+  <label for="age">Age</label>
+  <input type="number" name="age" id="age" value="<%=@user.age%>"><br/><br/>
+  <label for="mail">E-mail</label>
+  <input type="text" name="email" id="mail" value="<%=@user.email%>" required><br/><br/>
+  <input type="submit" value="update">
+</form>

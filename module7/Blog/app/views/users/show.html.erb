@@ -1,0 +1,18 @@
+<h2>Profile</h2>
+User ID : <%= @user.id %><br/>
+Name : <%= @user.name %><br/>
+Bio : <%= @user.bio %><br/>
+Age : <%= @user.age %><br/>
+<a href="/edituser/<%= @user.id %>">Edit User</a><br/>
+<a href="/addpost/<%= @user.id %>">Add New Post</a><br/>
+<%= button_to "Delete User", @user, method: :delete %><hr/>
+<h3><%= render "layouts/flash" %></h3>
+<% posts = @user.posts %>
+<% posts.each do |post| %>
+  <% user = post.user %>
+  <a href="users/<%= user.id %>"><%= user.name %></a>
+  <h3><%= post.title %></h3>
+  <h4><%= post.description %></h4>
+  <a href="/editpost/<%= post.id %>">Edit</a>
+  <%= button_to "Delete", post, method: :delete %><hr/>
+<% end %>
