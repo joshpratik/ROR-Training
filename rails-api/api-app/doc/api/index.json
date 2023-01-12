@@ -1,0 +1,17 @@
+{
+  "resources": [
+    {
+      "name": "Mambers",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Listing users",
+          "link": "mambers/listing_users.json",
+          "groups": "all",
+          "route": "/members",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+require "rails"
+#require "sprockets/railtie"
 require_relative "boot"
 
 require "rails/all"
