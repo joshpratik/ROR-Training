@@ -3,7 +3,7 @@ require "rspec_api_documentation/dsl"
 
 resource "Mambers" do
   get "/members" do
-    example "Listing users" do
+    example "Listing all users" do
       do_request
 
       expect(status).to eq 200

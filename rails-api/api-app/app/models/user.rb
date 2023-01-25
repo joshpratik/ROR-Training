@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
@@ -9,6 +8,6 @@ class User < ApplicationRecord
   validates :email, :password, presence: true
 
   def jwt_payload
-    super.merge("foo" => "bar")
+    super
   end
 end

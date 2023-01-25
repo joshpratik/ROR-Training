@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 class MembersController < ApplicationController
   before_action :authenticate_user!, except: [:create]
@@ -6,11 +5,9 @@ class MembersController < ApplicationController
 
   def index
     render json: User.all
-    #@user = User.all
   end
 
   def update
-    #debugger
     if @member.update(member_params)
       render json: "user updated", status: :ok
     else
@@ -20,7 +17,6 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    #debugger
     @member.destroy
   end
 

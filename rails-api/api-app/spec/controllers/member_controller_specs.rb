@@ -10,7 +10,7 @@ RSpec.describe MembersController, type: :request do
       "bio" => "Born in Pune",
     }
   end
-  context "members /index" do
+  context "List all members" do
     it "login as user it shoild return all the users" do
       @user = create_list(:user, 10)
       sign_in(@user[0])
@@ -21,7 +21,7 @@ RSpec.describe MembersController, type: :request do
     end
   end
 
-  context "PATCH update" do
+  context "Update User" do
     let(:user) { create :user }
     it "should update user with all params" do
       sign_in(user)
@@ -34,27 +34,24 @@ RSpec.describe MembersController, type: :request do
                                        bio: "born in pune",
                                      }, id: user.id,
                                    }
-      #debugger
       expect(response).to have_http_status(:success)
     end
   end
 
-  context "Delete destroy" do
+  context "Delete user from database" do
     let(:user) { create :user }
     it "should delete user" do
       sign_in(user)
       delete "/members/#{user.id}"
-      #debugger
       expect(response).to have_http_status(:success)
     end
   end
 
-  context "Fetch User" do
+  context "Get user from his id" do
     let(:user) { create :user }
-    it "should delete user" do
+    it "should return user of privided user" do
       sign_in(user)
       get "/members/#{user.id}"
-      #debugger
       expect(response).to have_http_status(:success)
     end
   end
